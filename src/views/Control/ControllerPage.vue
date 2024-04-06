@@ -4,7 +4,6 @@ import BreadCrumb from "@/components/BreadCrumb/BreadCrumb.vue";
 import { onMounted } from "vue";
 import {useCounterStore} from "@/stores/counter.js";
 import {ElMessage} from "element-plus";
-import {controlledRef} from "@vueuse/core";
 const store = useCounterStore()
 //操作日志列表
 const controlList = ref([
@@ -66,7 +65,7 @@ const deleteWrong = () => {
   if (store.controllerTarget[0]){
     ElMessage({
       type: 'success',
-      message: '成功删除'
+      message: '成功删除第' + `${store.controllerTarget[0].id}` + '行'
     })
   }else {
    ElMessage({
@@ -90,6 +89,7 @@ checkStatus()
 const isLoading = ref(false)
 onMounted(() => {
   isLoading.value = true
+  store.controllerTarget = {}
   setTimeout(() => {
     isLoading.value = false
   },3000)

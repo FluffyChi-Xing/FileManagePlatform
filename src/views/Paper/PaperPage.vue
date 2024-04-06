@@ -124,7 +124,27 @@ const selectAll = (selection) => {
     selection.length = 1
   }
 }
-
+//上传论文
+const uploadVisible = ref(false)
+const uploadForm = reactive({
+  title: '',
+  domain: '',
+  type: '',
+  code: '',
+  push: Date,
+  author: '',
+  file: ''
+})
+const uploadPaper = () => {
+  uploadVisible.value = true
+}
+const submitUpload = () => {
+  uploadVisible.value = false
+  ElMessage({
+    type: "success",
+    message: '上传成功'
+  })
+}
 //删除
 const deleteRow = () => {
   if (store.paperTarget[0]) {
@@ -177,6 +197,29 @@ const handleClose = () => {
         console.log(err)
       })
 }
+
+//论文下载
+const downloadPaper = ref(false)
+const download = () => {
+  if (store.paperTarget[0]){
+    downloadPaper.value = true
+  }else {
+    ElMessage({
+      type: "warning",
+      message: '请先选择要下载的论文'
+    })
+  }
+}
+const qrcodeCanvasRef = ref();
+const dowloadChange = async () => {
+  const url = await qrcodeCanvasRef.value.toDataURL();
+  const a = document.createElement('a');
+  a.download = 'QRCode.png';
+  a.href = url;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+};
 </script>
 
 <template>
@@ -186,8 +229,8 @@ const handleClose = () => {
     <!-- 顶部工具栏 -->
     <div class="w-full h-10 relative block py-1">
       <div class="w-full h-auto relative flex">
-        <el-button type="primary">论文上传</el-button>
-        <el-button type="primary" plain>论文下载</el-button>
+        <el-button type="primary" @click="uploadPaper">论文上传</el-button>
+        <el-button type="primary" plain @click="download">论文下载</el-button>
       </div>
     </div>
     <el-skeleton
@@ -217,6 +260,68 @@ const handleClose = () => {
         </el-table>
       </div>
     </el-skeleton>
+    <!-- 上传对话框-->
+    <el-dialog
+        v-model="uploadVisible"
+        title="上传论文"
+        width="500px"
+        style="height: auto"
+        draggable
+    >
+      <div class="w-full h-auto relative block">
+        <el-form
+            v-model="uploadForm"
+            label-width="150px"
+            status-icon
+        >
+          <el-form-item label="上传期刊">
+            <el-input v-model="uploadForm.title" clearable placeholder="请输入论文期刊" />
+          </el-form-item>
+          <el-form-item label="上传领域">
+            <el-input v-model="uploadForm.domain" clearable placeholder="请输入论文领域" />
+          </el-form-item>
+          <el-form-item label="上传时间">
+            <el-date-picker
+                v-model="uploadForm.push"
+                type="date"
+                placeholder="请选择日期"
+            />
+          </el-form-item>
+          <el-form-item label="选择文件">
+            <el-upload v-model="uploadForm.file" :limit="1" >
+              <el-button type="primary" plain>上传论文</el-button>
+              <template #tip>
+                <div class="el-upload__tip">
+                  警告论文格式必须是......
+                </div>
+              </template>
+            </el-upload>
+          </el-form-item>
+          <el-form-item label="是否附带源码">
+            <el-select v-model="value" placeholder="是否附带源码" style="width: 240px">
+              <el-option v-for="item in isCode" :key="item" :label="item.label" :value="item.value" />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="上传人">
+            <el-select
+                v-model="values"
+                placeholder="请选择上传者"
+                style="width: 240px"
+            >
+              <el-option v-for="item in isAuthor" :key="item" :label="item.label" :value="item.value" />
+            </el-select>
+          </el-form-item>
+        </el-form>
+      </div>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button @click="uploadVisible = false">取消</el-button>
+          <el-button type="primary" @click="submitUpload">
+            上传
+          </el-button>
+        </div>
+      </template>
+    </el-dialog>
     <!-- 编辑对话框 -->
     <el-dialog
         v-model="dialogVisiable"
@@ -269,6 +374,26 @@ const handleClose = () => {
           <el-button type="primary" @click="saveStorge">
             保存修改
           </el-button>
+        </div>
+      </template>
+    </el-dialog>
+    <!-- 下载论文 -->
+    <el-dialog
+        title="论文下载"
+        v-model="downloadPaper"
+        width="200px"
+        style="height: auto"
+        draggable
+    >
+      <div class="w-full h-auto relative block">
+        <a-qrcode ref="qrcodeCanvasRef" src="https://baidu.com" />
+        <div class="w-full h-auto relative flex justify-center mt-2">
+          <el-button type="primary" class="mx-auto" @click="dowloadChange">下载二维码</el-button>
+        </div>
+      </div>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button type="primary" @click="downloadPaper = false">关闭</el-button>
         </div>
       </template>
     </el-dialog>

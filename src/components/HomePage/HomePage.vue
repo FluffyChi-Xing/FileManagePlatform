@@ -142,13 +142,21 @@ onMounted(() => {
           </div>
         </div>
       </el-card>
-      <div class="w-full h-auto relative grid grid-cols-2 gap-4">
+      <div class="w-full h-auto relative overflow-x-hidden grid grid-cols-2 gap-4">
         <!-- 资产状态 -->
         <el-card id="ch_1" class="black w-full mt-4 p-3 h-[350px] relative block overflow-hidden">
 
         </el-card>
         <!-- 资产数量 -->
         <el-card id="ch_2" class="black w-full mt-4 p-3 h-[350px] relative block overflow-hidden">
+
+        </el-card>
+        <!-- 第三个统计图 -->
+        <el-card id="ch_3" class="black w-full mt-4 h-[350px] relative block overflow-hidden object-contain">
+
+        </el-card>
+        <!-- 第四个统计图 -->
+        <el-card id="ch_4" class="black w-full mt-4 h-[350px] relative block overflow-hidden object-contain">
 
         </el-card>
       </div>

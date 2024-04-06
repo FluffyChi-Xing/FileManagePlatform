@@ -175,6 +175,12 @@ const downLoad = () => {
       type: "success",
       message: '正在开始下载'
     })
+    setTimeout(() => {
+      ElMessage({
+        type: "success",
+        message: '下载成功'
+      })
+    },2000)
   }else {
     ElMessage({
       type: 'warning',

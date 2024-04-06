@@ -204,6 +204,8 @@ const selectAll = (selection) => {
     selection.length = 1
   }
 }
+//预览导览
+const tour =  ref(false)
 //预览跳转页面
 //如果用户未选择预览文件，将拦截请求并做出反馈
 const preview = () => {
@@ -249,8 +251,11 @@ const preview = () => {
       type: "warning",
       message: '请先要预览哪个文件'
     })
+    tour.value = true
   }
 }
+const pre = ref()
+
 </script>
 
 <template>
@@ -260,7 +265,7 @@ const preview = () => {
     <!-- 顶部工具栏 -->
     <div class="w-full h-10 relative flex px-4">
       <el-button class="my-auto" type="primary" @click="upload">新建</el-button>
-      <el-button class="my-auto" type="primary" plain @click="preview">预览</el-button>
+      <el-button ref="pre" class="my-auto" type="primary" plain @click="preview">预览</el-button>
       <el-button class="my-auto" type="primary" plain>下载</el-button>
       <el-button class="my-auto" type="primary" plain @click="showDialog">分享</el-button>
       <!-- 文件系统搜索框 -->
@@ -272,6 +277,24 @@ const preview = () => {
         <el-button type="info" plain >搜索</el-button>
       </div>
     </div>
+    <!-- 虚拟导览 -->
+    <el-tour v-model="tour">
+      <el-tour-step
+          title="注意"
+          :target="pre.$el"
+          description="要想预览某个文件，您必须执行以下步骤:"
+      />
+      <el-tour-step
+          title="第一步"
+          :target="multipelTable.$el"
+          description="请先选择一个你想预览的文件"
+      />
+      <el-tour-step
+          title="第二步"
+          :target="pre.$el"
+          description="然后点击预览"
+      />
+    </el-tour>
     <!-- 文件列表 -->
     <el-skeleton
         animated
@@ -296,6 +319,7 @@ const preview = () => {
           <el-table-column prop="date" label="上传日期" />
           <el-table-column prop="update" label="修改日期" />
           <el-table-column prop="author" label="上传来源" />
+          <el-empty />
           <el-table-column label="操作">
             <el-button size="small" type="primary" @click="editFile">编辑</el-button>
             <el-button size="small" type="warning" plain @click="deleteFile">删除</el-button>

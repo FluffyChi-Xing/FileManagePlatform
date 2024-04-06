@@ -69,17 +69,25 @@ checkStatu()
 const isLoading = ref(false)
 onMounted(() => {
   isLoading.value = true
+  store.userLogTarget = {}
   setTimeout(() => {
     isLoading.value = false
   },3000)
 })
 //删除文件
 const deleteFile = () => {
-  ElMessage({
-    type: "success",
-    message: '删除成功'
-  })
-  store.badge -= 1
+  if (store.userLogTarget[0]){
+    ElMessage({
+      type: "success",
+      message: '成功删除第' + `${store.userLogTarget[0].id}` + '行'
+    })
+    store.badge -= 1
+  }else {
+    ElMessage({
+      type: "warning",
+      message: '请选择要删除的日志'
+    })
+  }
 }
 
 //列表选择函数，用于确定选中了哪一行
