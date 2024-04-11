@@ -11,6 +11,9 @@ import OtherPage from "@/views/Other/OtherPage.vue";
 import UserLog from "@/views/Userlog/UserLog.vue";
 import ControllerPage from "@/views/Control/ControllerPage.vue";
 import ClintCenter from "@/views/ClientCenter/ClintCenter.vue";
+import NotFoundPage from "@/views/404/NotFoundPage.vue";
+import NewsPage from "@/views/NewsUpload/NewsPage.vue";
+import NewsManage from "@/views/NewsManage/NewsManage.vue";
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
@@ -63,6 +66,16 @@ const router = createRouter({
           path: '/client',
           name: 'client',
           component: ClintCenter
+        },
+        {
+          path: '/news',
+          name: 'news',
+          component: NewsPage
+        },
+        {
+          path: '/newscol',
+          name: 'newscol',
+          component: NewsManage
         }
       ]
     },
@@ -70,6 +83,15 @@ const router = createRouter({
       path: '/login',
       name: 'LoginPage',
       component: LoginPage
+    },
+    {
+      path: '/404',
+      name: 'notfound',
+      component: NotFoundPage
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/404'
     }
   ]
 })

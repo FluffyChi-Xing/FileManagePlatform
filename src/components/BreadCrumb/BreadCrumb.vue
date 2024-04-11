@@ -38,6 +38,12 @@ const direct = () => {
       case '/control':
         bread.value[i].name = '操作日志'
             break;
+      case '/news' :
+        bread.value[i].name = '新闻发布'
+            break;
+      case '/newscol':
+        bread.value[i].name = '新闻管理'
+            break;
     }
   }
 }

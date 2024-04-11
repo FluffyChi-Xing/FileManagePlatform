@@ -16,6 +16,7 @@
     "@vue-office/excel": "^1.7.6",
     "@vue-office/pdf": "^1.6.5",
     "@vueuse/core": "^10.9.0",
+    "@wangeditor/editor-for-vue": "^5.1.12",
     "ant-design-vue": "^4.1.2",
     "echarts": "^5.5.0",
     "element-plus": "^2.6.2",

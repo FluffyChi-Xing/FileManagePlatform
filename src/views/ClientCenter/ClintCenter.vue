@@ -8,7 +8,7 @@ const router = useRouter()
 const form = reactive({
   name: '张三',
   phone: 12355648909,
-  password: '',
+  password: '123123321',
   permission: 'normal',
   isRoot: false,
   gender: 'male'
@@ -59,7 +59,7 @@ const submit = () => {
           <el-input type="password" prefix-icon="Lock" v-model="form.password" show-password clearable :placeholder="form.password" />
         </el-form-item>
         <el-form-item label="绑定手机号" prop="phone">
-          <el-input clearable maxlength="11" show-password v-model="form.phone" type="password" show-word-limit />
+          <el-input prefix-icon="Phone" clearable maxlength="11" show-password v-model="form.phone" type="password" show-word-limit />
         </el-form-item>
         <el-form-item label="角色" prop="permission">
           <el-radio-group :disabled="isDisabled" v-model="form.permission">

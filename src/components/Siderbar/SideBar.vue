@@ -9,7 +9,13 @@ import {
   FileOutlined,
   EllipsisOutlined,
   SaveOutlined,
-  SmileOutlined
+  SmileOutlined,
+  BookOutlined,
+  ExportOutlined,
+  FolderOpenOutlined,
+  UserOutlined,
+  UnlockOutlined,
+  TransactionOutlined
 } from '@ant-design/icons-vue';
 import { useRoute } from "vue-router";
 import { watchEffect } from "vue";
@@ -79,7 +85,15 @@ const items = reactive([
   getItem('日志审计', 'sub3', () => h(CodeOutlined), [
     getItem('操作日志', '/control',() => h(SaveOutlined)),
     getItem('用户日志', '/user',() => h(SmileOutlined)),
-  ])
+  ]),
+  getItem('文章管理','sub4',() => h(BookOutlined),[
+      getItem('新闻发布','/news',() => h(ExportOutlined),null),
+      getItem('新闻管理','/newscol',() => h(FolderOpenOutlined),null)
+  ]),
+  getItem('用户管理','sub5',() => h(UserOutlined),[
+      getItem('权限分发','sub5-1',() => h(UnlockOutlined),null)
+  ]),
+  getItem('数字资产','sub6',() => h(TransactionOutlined),null)
 ]);
 //菜单跳转函数
 const jump = (e) => {
@@ -104,6 +118,12 @@ const jump = (e) => {
           break;
     case '/control':
       router.push('/control')
+          break;
+    case '/news':
+      router.push('/news')
+          break;
+    case '/newscol':
+      router.push('/newscol')
           break;
   }
 }
