@@ -44,6 +44,9 @@ const direct = () => {
       case '/newscol':
         bread.value[i].name = '新闻管理'
             break;
+      case '/userman':
+        bread.value[i].name = '权限分发'
+            break;
     }
   }
 }

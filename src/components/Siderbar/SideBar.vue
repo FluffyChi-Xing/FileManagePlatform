@@ -15,7 +15,7 @@ import {
   FolderOpenOutlined,
   UserOutlined,
   UnlockOutlined,
-  TransactionOutlined
+  TransactionOutlined, PaperClipOutlined, AndroidOutlined, PictureOutlined
 } from '@ant-design/icons-vue';
 import { useRoute } from "vue-router";
 import { watchEffect } from "vue";
@@ -79,7 +79,11 @@ const items = reactive([
   getItem('共享文件', 'sub2', () => h(ApartmentOutlined), [
       getItem('组会文件','/congress',() => h(CoffeeOutlined),null),
       getItem('项目资源','/project',() => h(DatabaseOutlined),null),
-      getItem('论文资源','/paper',() => h(FileOutlined),null),
+      getItem('论文资源','sub2-1',() => h(FileOutlined),[
+          getItem('论文汇总','/paper',() => h(PaperClipOutlined),null),
+          getItem('人工智能','sub2-2',() => h(AndroidOutlined),null),
+          getItem('图像处理','sub2-3',() => h(PictureOutlined),null)
+      ]),
       getItem('其他','/other',() => h(EllipsisOutlined),null)
   ]),
   getItem('日志审计', 'sub3', () => h(CodeOutlined), [
@@ -91,7 +95,7 @@ const items = reactive([
       getItem('新闻管理','/newscol',() => h(FolderOpenOutlined),null)
   ]),
   getItem('用户管理','sub5',() => h(UserOutlined),[
-      getItem('权限分发','sub5-1',() => h(UnlockOutlined),null)
+      getItem('权限分发','/userman',() => h(UnlockOutlined),null)
   ]),
   getItem('数字资产','sub6',() => h(TransactionOutlined),null)
 ]);
@@ -124,6 +128,9 @@ const jump = (e) => {
           break;
     case '/newscol':
       router.push('/newscol')
+          break;
+    case '/userman':
+      router.push('/userman')
           break;
   }
 }

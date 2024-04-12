@@ -49,6 +49,9 @@ export const useCounterStore = defineStore('counter', () => {
       case '/newscol':
         currentRoute.value.push(route.fullPath)
         break;
+      case '/userman':
+        currentRoute.value.push(route.fullPath)
+        break;
     }
   }
 

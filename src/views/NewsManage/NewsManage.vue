@@ -133,10 +133,10 @@ const table = ref([
                 stripe
             >
               <el-table-column type="selection" />
-              <el-table-column width="120" prop="id" label="id" />
-              <el-table-column width="120" prop="author" label="作者" />
-              <el-table-column width="120" prop="type" label="分区" />
-              <el-table-column width="120" prop="isUp" label="是否发布" />
+              <el-table-column width="150" prop="id" label="id" />
+              <el-table-column width="150" prop="author" label="作者" />
+              <el-table-column width="150" prop="type" label="分区" />
+              <el-table-column width="150" prop="isUp" label="是否发布" />
               <el-table-column prop="push" label="提交日期" />
               <el-table-column label="操作">
                 <el-button size="small" type="primary">修改</el-button>

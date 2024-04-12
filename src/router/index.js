@@ -14,6 +14,7 @@ import ClintCenter from "@/views/ClientCenter/ClintCenter.vue";
 import NotFoundPage from "@/views/404/NotFoundPage.vue";
 import NewsPage from "@/views/NewsUpload/NewsPage.vue";
 import NewsManage from "@/views/NewsManage/NewsManage.vue";
+import UserManage from "@/views/Usermanage/UserManage.vue";
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
@@ -76,6 +77,11 @@ const router = createRouter({
           path: '/newscol',
           name: 'newscol',
           component: NewsManage
+        },
+        {
+          path: '/userman',
+          name: 'userman',
+          component: UserManage
         }
       ]
     },
